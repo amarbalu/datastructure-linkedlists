@@ -40,16 +40,19 @@ while(indexvalue!==null){
 return array;
   }
 
-  insert(value,index){  //O[n]
+  insert(value,indexVar){  //O[n]
     const array=this.printItems();
-    if(index < array.length){
+    const index=indexVar-1;
+    if(index < array.length && index){
       const node=new Node(value);
     const leader=this.traverseToIndex(index-1);
     const follower=leader.next;
     leader.next=node;
     node.next=follower;
     this.length++;
-    }else{
+    }else if(index=== 0){
+      this.prepend(value)
+      }else{
       this.append(value)
     }
 return this;
@@ -64,14 +67,17 @@ while(count<index){
 return list;
   }
 
-  remove(index){  //O[n]
+  remove(indexVar){  //O[n]
      const array=this.printItems();
-    if(index < array.length){
+     const index=indexVar-1;
+    if(index < array.length && index){
     const leader=this.traverseToIndex(index-1);
     const follower=leader.next;
     leader.next=follower.next;
    this.length--;
     
+    }else if(index===0){
+this.head=this.head.next;
     }
 return this;
   }
@@ -80,5 +86,8 @@ return this;
 const linkedList= new MyLinkedList(10);
 linkedList.append(3);
 linkedList.insert(4,100)
-linkedList.insert(2,1)
+linkedList.insert(2,2)
+linkedList.insert(99,1)
+linkedList.remove(1);
+// linkedList.remove(2)
 linkedList.printItems();
